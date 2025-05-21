@@ -127,6 +127,5 @@ L'interface utilisateur permet de :
 - Mame Penda DIAW
 
 ## Licence
-MIT
 
-Ce projet est sous licence [spécifier la licence].
+Ce projet est sous licence MIT.
