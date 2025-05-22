@@ -123,8 +123,9 @@ L'interface utilisateur permet de :
 
 ## Auteurs
 
-- [Votre nom]
+- Mame Diarra Bousso DIOP
+- Mame Penda DIAW
 
 ## Licence
 
-Ce projet est sous licence [spécifier la licence].
+Ce projet est sous licence MIT.
