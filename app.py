@@ -8,6 +8,7 @@ import matplotlib.pyplot as plt
 import joblib
 import os
 import time
+import re
 # Liste de mots associés aux fake news (fréquemment trouvés dans les titres sensationnalistes)
 FAKE_NEWS_WORDS = [
     'shocking', 'secret', 'they don\'t want you to know', 'conspiracy', 'hoax', 'scam', 
