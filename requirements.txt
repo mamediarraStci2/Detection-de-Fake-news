@@ -20,11 +20,22 @@ langdetect>=1.0.9
 # Visualization et UI
 streamlit>=1.28.0
 plotly>=5.18.0
+tabulate>=0.9.0
 
 # Clustering
 umap-learn>=0.5.4
 hdbscan>=0.8.33
 
-# Retiré torch et tensorflow car incompatibles avec Python 3.13.3
-# Si ces packages sont nécessaires pour votre application, utilisez-les via une API REST
-# ou mettez à jour votre code pour fonctionner sans eux
+# PyTorch pour les modèles transformers
+torch>=2.0.0
+
+# Tensorflow (si vous utilisez la version TensorFlow)
+tensorflow>=2.12.0
+tensorflow-hub>=0.14.0
+tensorflow-text>=2.12.0
+
+# Datasets pour l'entraînement
+datasets>=2.12.0
+
+# Note: Si vous rencontrez des problèmes avec ces packages, exécutez l'entraînement 
+# dans un environnement comme Google Colab qui offre un accès à des GPUs

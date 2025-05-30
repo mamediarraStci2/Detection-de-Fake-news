@@ -9,6 +9,13 @@ import joblib
 import os
 import time
 import re
+
+# Import des modèles transformers
+try:
+    from transformer_prediction import predict_fake_news as transformer_predict
+    TRANSFORMERS_AVAILABLE = True
+except ImportError:
+    TRANSFORMERS_AVAILABLE = False
 # Liste de mots associés aux fake news (fréquemment trouvés dans les titres sensationnalistes)
 FAKE_NEWS_WORDS = [
     'shocking', 'secret', 'they don\'t want you to know', 'conspiracy', 'hoax', 'scam', 
@@ -303,12 +310,25 @@ def main():
     # Barre latérale
     st.sidebar.title("Options")
     
+    # Sélection du modèle
+    model_type = st.sidebar.radio(
+        "Type de modèle",
+        ["Transformers (BERT/CamemBERT)", "Clustering (KMeans)"],
+        index=0 if TRANSFORMERS_AVAILABLE else 1
+    )
+    
     # Sélection de la langue
     language = st.sidebar.radio(
         "Langue",
         ["Français", "Anglais"],
         index=0
     )
+    
+    # Conversion de la langue pour les modèles transformers
+    lang_map = {
+        "Français": "french",
+        "Anglais": "english"
+    }
     
     # Exemples de textes
     if language == "Français":
@@ -342,13 +362,28 @@ def main():
         if text:
             # Affichage d'un spinner pendant l'analyse
             with st.spinner("Analyse en cours..."):
-                # Prédiction améliorée
-                is_fake, probabilities, processing_time, language = predict_fake_news(
-                    text, preprocessor, kmeans_model
-                )
+                if model_type.startswith("Transformers") and TRANSFORMERS_AVAILABLE:
+                    # Utiliser les modèles transformers
+                    try:
+                        is_fake, probabilities, processing_time, detected_language = transformer_predict(
+                            text, lang_map[language]
+                        )
+                        st.success("Analyse avec les modèles transformers (BERT/CamemBERT) terminée!")
+                    except Exception as e:
+                        st.error(f"Erreur lors de l'analyse avec les modèles transformers: {e}")
+                        st.info("Utilisation du modèle de clustering comme solution de secours...")
+                        # Fallback to clustering
+                        is_fake, probabilities, processing_time, detected_language = predict_fake_news(
+                            text, preprocessor, kmeans_model
+                        )
+                else:
+                    # Utiliser le modèle de clustering
+                    is_fake, probabilities, processing_time, detected_language = predict_fake_news(
+                        text, preprocessor, kmeans_model
+                    )
                 
                 # Affichage des résultats
-                display_results(is_fake, probabilities, processing_time, language)
+                display_results(is_fake, probabilities, processing_time, detected_language)
         else:
             st.error("Veuillez saisir un texte à analyser.")
     
