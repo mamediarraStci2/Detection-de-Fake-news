@@ -38,8 +38,12 @@ env/
 instance/
 .webassets-cache
 
-# Model files (if they are large, you might want to exclude them)
-# models/
+# Data files (these are often too large for GitHub)
+/Fake_news/
+/French_Fake_News/
 
-# Results folder (if it contains large files)
-# results/
+# Model files
+/models/
+
+# Results folder
+results/

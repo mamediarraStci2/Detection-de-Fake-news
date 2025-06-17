@@ -1,5 +1,0 @@
-silhouette_score: 0.6244224485418949
-davies_bouldin_score: 1.6474442840622376
-fake_cluster: 0
-tfidf_max_features: 2000
-n_clusters: 2
