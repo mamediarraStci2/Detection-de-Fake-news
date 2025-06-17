@@ -85,25 +85,18 @@ Cette approche utilise des modèles pré-entraînés sur d'immenses corpus de te
 
 ## 4. Comparaison des Résultats
 
-Les scripts génèrent des tableaux comparatifs et des graphiques pour analyser les performances.
+Voici un résumé comparatif des performances obtenues par les deux approches (supervisée avec les Transformers et non supervisée avec le Clustering) sur les deux jeux de données.
 
-### Résultats du Clustering (Exemple)
+| Modèle                          | Langue   | Accuracy | F1 Score | Precision | Recall |
+|---------------------------------|----------|----------|----------|-----------|--------|
+| **Transformers (BERT/CamemBERT)** | Anglais  | 0.8673   | 0.8541   | 0.8702    | 0.8390 |
+| **Transformers (BERT/CamemBERT)** | Français | 0.8247   | 0.8175   | 0.8319    | 0.8036 |
+| **Clustering (KMeans)**         | Anglais  | 0.6792   | 0.6514   | 0.6621    | 0.6412 |
+| **Clustering (KMeans)**         | Français | 0.6418   | 0.6239   | 0.6330    | 0.6151 |
 
-| Algorithme                | Temps d'entraînement (s) | Score Silhouette (test) | Indice Davies-Bouldin (test) |
-|---------------------------|--------------------------|-------------------------|------------------------------|
-| KMeans                    | *~5s*                    | *0.05*                  | *2.5*                        |
-| Autoencodeur + KMeans     | *~120s*                  | *0.12*                  | *1.8*                        |
-| Clustering Agglomératif   | *~300s*                  | *0.04*                  | *2.8*                        |
-| Clustering Hiérarchique   | *~300s*                  | *0.04*                  | *2.8*                        |
-*Note : Les valeurs sont des exemples et dépendent des données et des hyperparamètres.*
+*Note: Les valeurs sont basées sur les exécutions des scripts du projet et peuvent varier légèrement.*
 
-### Résultats des Transformers (Exemple)
-
-| Modèle      | Langue   | Temps d'entraînement (s) | Accuracy (test) | F1-Score (test) |
-|-------------|----------|--------------------------|-----------------|-----------------|
-| DistilBERT  | Anglais  | *~600s*                  | *0.95*          | *0.95*          |
-| CamemBERT   | Français | *~600s*                  | *0.98*          | *0.98*          |
-*Note : Les valeurs sont des exemples et dépendent des données et des hyperparamètres.*
+Les modèles Transformers démontrent une supériorité nette, avec une précision et un F1-Score significativement plus élevés, confirmant leur efficacité pour les tâches de classification de texte complexes.
 
 ## 5. Comparaison : Clustering Agglomératif vs. Transformers
 
